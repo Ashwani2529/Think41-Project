@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const API_BASE = 'http://localhost:5000';
+const API_BASE = 'https://think41-project.onrender.com';
 
 async function testEndpoint(method, url, description) {
   try {
