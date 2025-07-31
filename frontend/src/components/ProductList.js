@@ -64,6 +64,7 @@ const ProductList = () => {
       if (currentMaxPrice) params.maxPrice = parseFloat(currentMaxPrice);
 
       const response = await productsAPI.getProducts(params);
+      console.log(response.data);
       setProducts(response.data || []);
       setPagination(response.pagination || {});
     } catch (error) {

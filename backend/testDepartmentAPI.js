@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const API_BASE = 'http://localhost:3001';
+const API_BASE = 'http://localhost:5000';
 
 async function testEndpoint(method, url, description) {
   try {
@@ -89,4 +89,4 @@ async function runTests() {
 // Wait a moment for server to start, then run tests
 setTimeout(() => {
   runTests().catch(console.error);
-}, 3000); 
+}, 5000); 

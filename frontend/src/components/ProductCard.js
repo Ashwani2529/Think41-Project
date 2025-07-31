@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
   const getDepartmentColor = (department) => {
-    switch (department?.toLowerCase()) {
+    console.log(department);
+    switch (department?.name?.toLowerCase()) {
       case 'women':
         return 'bg-pink text-white';
       case 'men':
