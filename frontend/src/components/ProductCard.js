@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
   const getDepartmentColor = (department) => {
-    console.log(department);
-    switch (department?.name?.toLowerCase()) {
+    // Handle both string (old format) and object (new format)
+    const departmentName = typeof department === 'string' ? department : department?.name;
+    switch (departmentName?.toLowerCase()) {
       case 'women':
         return 'bg-pink text-white';
       case 'men':
@@ -45,7 +46,7 @@ const ProductCard = ({ product }) => {
     <div className="product-card h-100 position-relative">
       {/* Department Badge */}
       <div className={`position-absolute top-0 end-0 m-2 px-2 py-1 rounded-pill small ${getDepartmentColor(product.department)}`}>
-        {product.department}
+        {typeof product.department === 'string' ? product.department : product.department?.name || 'Unknown'}
       </div>
 
       {/* Discount Badge */}

@@ -45,7 +45,9 @@ const ProductDetail = () => {
   };
 
   const getDepartmentColor = (department) => {
-    switch (department?.toLowerCase()) {
+    // Handle both string (old format) and object (new format)
+    const departmentName = typeof department === 'string' ? department : department?.name;
+    switch (departmentName?.toLowerCase()) {
       case 'women':
         return 'text-pink';
       case 'men':
@@ -151,7 +153,7 @@ const ProductDetail = () => {
                 <i className={`${getCategoryIcon(product.category)} text-muted me-2 fa-lg`}></i>
                 <span className="badge bg-light text-dark me-3">{product.category}</span>
                 <span className={`badge ${getDepartmentColor(product.department)} bg-opacity-10 border`}>
-                  {product.department}
+                  {typeof product.department === 'string' ? product.department : product.department?.name || 'Unknown'}
                 </span>
               </div>
               
@@ -222,7 +224,7 @@ const ProductDetail = () => {
               <i className="fas fa-building me-2"></i>
               Department
             </h6>
-            <p>{product.department}</p>
+            <p>{typeof product.department === 'string' ? product.department : product.department?.name || 'Unknown'}</p>
           </div>
 
           <div className="info-card">
