@@ -3,12 +3,14 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const Product = require('./models/Product');
 const Department = require('./models/Department');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // MongoDB connection URI
-const MONGODB_URI = 'mongodb+srv://ashwani2749:12345@cluster0.rkbeh5k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const MONGODB_URI = process.env.MONGO_URI;
 const DATABASE_NAME = 'products_db';
 
 // Middleware
@@ -412,13 +414,6 @@ async function startServer() {
     app.listen(PORT, () => {
       console.log(`🚀 Server running on http://localhost:${PORT}`);
       console.log(`📚 API Endpoints available:`);
-      console.log(`   GET  /api/products                - List products`);
-      console.log(`   GET  /api/products/:id            - Get product by ID`);
-      console.log(`   GET  /api/departments             - Get all departments`);
-      console.log(`   GET  /api/departments/:id         - Get department by ID`);
-      console.log(`   GET  /api/departments/:id/products- Get products in department`);
-      console.log(`   GET  /api/categories              - Get categories`);
-      console.log(`   GET  /api/brands                  - Get brands`);
     });
   } catch (error) {
     console.error('❌ Failed to start server:', error.message);
