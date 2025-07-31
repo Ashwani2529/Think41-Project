@@ -5,9 +5,12 @@
   "main": "loadProducts.js",
   "scripts": {
     "dev": "nodemon server.js",
+    "start": "node server.js",
     "server": "node server.js",
     "load": "node loadProducts.js",
-    "verify": "node verifyData.js"
+    "verify": "node verifyData.js",
+    "migrate": "node migrateDepartments.js",
+    "rollback": "node migrateDepartments.js rollback"
   },
   "dependencies": {
     "csv-parser": "^3.0.0",

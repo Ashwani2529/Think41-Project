@@ -1,28 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { productsAPI } from '../services/api';
+import { productsAPI, departmentsAPI } from '../services/api';
 
 const Home = () => {
   const [stats, setStats] = useState({
     totalProducts: 0,
     categories: [],
-    brands: []
+    brands: [],
+    departments: []
   });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [productsResponse, categoriesResponse, brandsResponse] = await Promise.all([
+        const [productsResponse, categoriesResponse, brandsResponse, departmentsResponse] = await Promise.all([
           productsAPI.getProducts({ limit: 1 }),
           productsAPI.getCategories(),
-          productsAPI.getBrands()
+          productsAPI.getBrands(),
+          departmentsAPI.getDepartments()
         ]);
 
         setStats({
           totalProducts: productsResponse.pagination?.totalCount || 0,
           categories: categoriesResponse.data || [],
-          brands: brandsResponse.data || []
+          brands: brandsResponse.data || [],
+          departments: departmentsResponse.data || []
         });
       } catch (error) {
         console.error('Error fetching stats:', error);
@@ -82,10 +85,10 @@ const Home = () => {
           
           <div className="stat-card">
             <div className="stat-number">
-              <i className="fas fa-shopping-cart text-warning me-2"></i>
-              24/7
+              <i className="fas fa-building text-warning me-2"></i>
+              {stats.departments.length}
             </div>
-            <div className="stat-label">Available</div>
+            <div className="stat-label">Departments</div>
           </div>
         </div>
       )}
@@ -98,9 +101,9 @@ const Home = () => {
               <div className="mb-3">
                 <i className="fas fa-search fa-3x text-primary"></i>
               </div>
-              <h5 className="card-title">Easy Search</h5>
+              <h5 className="card-title">Easy Browse</h5>
               <p className="card-text text-muted">
-                Find products quickly with our powerful search and filtering system
+                Browse by departments or find products with our powerful search and filtering
               </p>
             </div>
           </div>
@@ -148,7 +151,11 @@ const Home = () => {
                 <i className="fas fa-th-large me-2"></i>
                 View All Products
               </Link>
-              <Link to="/products?category=Accessories" className="btn btn-outline-primary btn-lg px-4">
+              <Link to="/departments" className="btn btn-outline-primary btn-lg px-4">
+                <i className="fas fa-building me-2"></i>
+                Shop by Department
+              </Link>
+              <Link to="/products?category=Accessories" className="btn btn-outline-secondary btn-lg px-4">
                 <i className="fas fa-star me-2"></i>
                 Popular Category
               </Link>

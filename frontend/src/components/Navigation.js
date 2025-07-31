@@ -41,6 +41,15 @@ const Navigation = () => {
                 Products
               </Link>
             </li>
+            <li className="nav-item">
+              <Link 
+                className={`nav-link ${location.pathname.startsWith('/departments') ? 'active' : ''}`} 
+                to="/departments"
+              >
+                <i className="fas fa-building me-1"></i>
+                Departments
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

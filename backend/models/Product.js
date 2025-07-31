@@ -28,10 +28,11 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  department: {
-    type: String,
+  department_id: {
+    type: Number,
     required: true,
-    index: true
+    index: true,
+    ref: 'Department' // Reference to Department collection
   },
   sku: {
     type: String,
@@ -48,7 +49,7 @@ const productSchema = new mongoose.Schema({
 });
 
 // Create indexes for better query performance
-productSchema.index({ category: 1, department: 1 });
+productSchema.index({ category: 1, department_id: 1 });
 productSchema.index({ brand: 1, category: 1 });
 productSchema.index({ retail_price: 1 });
 

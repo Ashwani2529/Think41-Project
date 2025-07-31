@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000,
+  timeout: 100000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -85,6 +85,44 @@ export const productsAPI = {
       return response.data;
     } catch (error) {
       throw new Error(error.response?.data?.error || 'Failed to search products');
+    }
+  },
+};
+
+export const departmentsAPI = {
+  // Get all departments
+  getDepartments: async () => {
+    try {
+      const response = await api.get('/api/departments');
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response?.data?.error || 'Failed to fetch departments');
+    }
+  },
+
+  // Get a single department by ID
+  getDepartment: async (id) => {
+    try {
+      const response = await api.get(`/api/departments/${id}`);
+      return response.data;
+    } catch (error) {
+      if (error.response?.status === 404) {
+        throw new Error('Department not found');
+      }
+      throw new Error(error.response?.data?.error || 'Failed to fetch department');
+    }
+  },
+
+  // Get products in a department with pagination and filters
+  getDepartmentProducts: async (departmentId, params = {}) => {
+    try {
+      const response = await api.get(`/api/departments/${departmentId}/products`, { params });
+      return response.data;
+    } catch (error) {
+      if (error.response?.status === 404) {
+        throw new Error('Department not found');
+      }
+      throw new Error(error.response?.data?.error || 'Failed to fetch department products');
     }
   },
 };
