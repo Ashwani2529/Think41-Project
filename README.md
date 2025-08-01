@@ -1,6 +1,6 @@
 # E-Commerce Products Catalog
 
-**Live Demo:** 🚀 [https://think41-ecommerce.netlify.app](https://think41-ecommerce.netlify.app)
+**Live Demo:** 🚀 [https://think41-project.vercel.app](https://think41-project.vercel.app)
 
 ## Overview
 
@@ -21,7 +21,7 @@ A full-stack MERN e-commerce application built with MongoDB, Express.js, React.j
 - **Frontend**: React.js with React Router, responsive UI components
 - **Backend**: Express.js RESTful API on port 5000
 - **Database**: MongoDB Atlas with normalized collections
-- **Deployment**: Frontend on Netlify, backend on cloud hosting
+- **Deployment**: Frontend on Vercel, backend on Render cloud hosting
 
 ## Navigation
 
