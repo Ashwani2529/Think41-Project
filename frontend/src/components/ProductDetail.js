@@ -95,7 +95,7 @@ const ProductDetail = () => {
           <i className="fas fa-exclamation-triangle fa-3x mb-3"></i>
           <h4>Product Not Found</h4>
           <p>{error}</p>
-          <div className="d-flex gap-3 justify-content-center">
+          <div className="d-flex gap-2 justify-content-center">
             <button className="btn btn-primary" onClick={() => navigate('/products')}>
               <i className="fas fa-arrow-left me-2"></i>
               Back to Products
@@ -179,13 +179,13 @@ const ProductDetail = () => {
               </div>
               
               <div className="product-detail-price mb-2">
-                {formatPrice(product.retail_price)}
+                {formatPrice(product.cost)}
               </div>
               
               {product.cost && product.cost !== product.retail_price && (
                 <div className="text-muted">
                   <span className="text-decoration-line-through">
-                    Cost: {formatPrice(product.cost)}
+                    Cost: {formatPrice(product.retail_price)}
                   </span>
                 </div>
               )}
@@ -200,7 +200,21 @@ const ProductDetail = () => {
               <i className="fas fa-barcode me-2"></i>
               Product Code
             </h6>
-            <p className="font-monospace">{product.sku}</p>
+            <p className="font-monospace" style={{ 
+              wordBreak: 'break-all', 
+              overflowWrap: 'break-word',
+              lineHeight: '1.4'
+            }}>
+              {product.sku && product.sku.length > 22
+                ? product.sku.match(/.{1,23}/g).join('\n').split('\n').map((chunk, index) => (
+                    <React.Fragment key={index}>
+                      {chunk}
+                      {index < Math.ceil(product.sku.length / 23) - 1 && <br />}
+                    </React.Fragment>
+                  ))
+                : product.sku
+              }
+            </p>
           </div>
 
           <div className="info-card">
@@ -245,9 +259,9 @@ const ProductDetail = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="d-flex gap-3 justify-content-center mt-4 pt-4 border-top">
+        <div className="d-flex gap-2 justify-content-center mt-4 pt-4 border-top">
           <button 
-            className="btn btn-outline-primary btn-lg"
+            className="btn btn-outline-primary btn-md"
             onClick={() => navigate('/products')}
           >
             <i className="fas fa-arrow-left me-2"></i>
@@ -256,7 +270,7 @@ const ProductDetail = () => {
           
           <Link 
             to={`/products?category=${encodeURIComponent(product.category)}`}
-            className="btn btn-primary btn-lg"
+            className="btn btn-primary btn-md"
           >
             <i className="fas fa-layer-group me-2"></i>
             Similar Products
@@ -264,7 +278,7 @@ const ProductDetail = () => {
           
           <Link 
             to={`/products?brand=${encodeURIComponent(product.brand)}`}
-            className="btn btn-outline-success btn-lg"
+            className="btn btn-outline-success btn-md"
           >
             <i className="fas fa-copyright me-2"></i>
             More from {product.brand}

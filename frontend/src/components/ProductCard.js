@@ -77,11 +77,11 @@ const ProductCard = ({ product }) => {
         {/* Pricing */}
         <div className="mb-3">
           <div className="product-price">
-            {formatPrice(product.retail_price)}
+            {formatPrice(product.cost)}
           </div>
           {product.cost && product.cost !== product.retail_price && (
             <div className="product-cost">
-              Cost: {formatPrice(product.cost)}
+              Cost: {formatPrice(product.retail_price)}
             </div>
           )}
         </div>
