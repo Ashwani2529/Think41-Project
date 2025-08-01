@@ -205,11 +205,11 @@ const ProductDetail = () => {
               overflowWrap: 'break-word',
               lineHeight: '1.4'
             }}>
-              {product.sku && product.sku.length > 22
-                ? product.sku.match(/.{1,23}/g).join('\n').split('\n').map((chunk, index) => (
+              {product.sku && product.sku.length > 20
+                ? product.sku.match(/.{1,20}/g).join('\n').split('\n').map((chunk, index) => (
                     <React.Fragment key={index}>
                       {chunk}
-                      {index < Math.ceil(product.sku.length / 23) - 1 && <br />}
+                      {index < Math.ceil(product.sku.length / 20) - 1 && <br />}
                     </React.Fragment>
                   ))
                 : product.sku
