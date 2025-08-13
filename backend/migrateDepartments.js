@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Product = require('./models/Product');
 const Department = require('./models/Department');
-
+const dotenv= require('dotenv')
+dotenv.config()
 // MongoDB connection URI
-const MONGODB_URI = 'mongodb+srv://ashwani2749:12345@cluster0.rkbeh5k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const MONGODB_URI = process.env.MONGO_URI;
 const DATABASE_NAME = 'products_db';
 
 async function connectDB() {
